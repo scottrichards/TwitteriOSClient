@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import BDBOAuth1Manager
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -39,6 +40,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        print(url.description)
+        let requestToken = BDBOAuth1Credential(queryString: url.query)
+        let twitterClient = BDBOAuth1SessionManager(baseURL: NSURL(string: Constants.Twitter.apiURL) as URL!, consumerKey: Constants.Twitter.consumerKey, consumerSecret: Constants.Twitter.consumerSecret)
+        twitterClient?.fetchAccessToken(withPath: "oauth/access_token",
+                                        method: "POST",
+                                        requestToken: requestToken,
+                                        success: {(accessToken: BDBOAuth1Credential?) -> Void in
+                            print("Got Token!")
+            }, failure: {(error : Error?) -> Void in
+                print("error: ")
+        })
+        
+        //        twitterClient?.fetchAccessToken(withPath: "oauth/access_token",
+//                                        method: "POST",
+//                                        requestToken: requestToken,
+//                                        success: { (accessToken: BDBOAuth1Credential?) -> Void in
+//                print("Got Token!")
+////            twitterClient.GET(Constants.Twitter.GetCredentials,
+////                              parameters: nil,
+////                              progress: nil,
+////                              success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+////                                print("account: \(response)")
+////                },
+////                              failue: { (task: NSURLSessionDataTask?, error: NSError) -> Void in 
+//        
+//            
+//            }) {(error: Error?) -> Void in
+//                print("error: \(error.localizedDescription)")
+//            }
+        
+        return true
     }
 
 
