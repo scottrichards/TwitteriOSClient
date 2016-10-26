@@ -53,6 +53,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     func login(success: @escaping () -> (), failure : @escaping (Error) -> ()) {
         loginSuccessClosure = success
         loginFailureClosure = failure
+        TwitterClient.sharedInstance?.deauthorize()
         TwitterClient.sharedInstance?.fetchRequestToken(withPath: "oauth/request_token",
                                          method: "GET",
                                          callbackURL: NSURL(string: Constants.Twitter.CallbackURL) as URL!,

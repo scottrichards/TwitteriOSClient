@@ -47,57 +47,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         TwitterClient.sharedInstance?.handleOpenURL(url: url)
         
-//        let requestToken = BDBOAuth1Credential(queryString: url.query)
-//        let twitterClient = TwitterClient.sharedInstance
-//        twitterClient?.fetchAccessToken(withPath: "oauth/access_token",
-//                                        method: "POST",
-//                                        requestToken: requestToken,
-//                                        success: {(accessToken: BDBOAuth1Credential?) -> Void in
-//                            print("Got Token!")
-//                            // -----
-//                                            
-//
-//                                            twitterClient?.homeTimeline(success: { (tweets : [Tweet]) in
-//                                                for tweet in tweets {
-//                                                                                                            print("tweet: \(tweet.text!)")
-//                                                                                                        }
-//                                                }, failure: { (error: Error) in
-//                                                    print("ERROR: \(error.localizedDescription)")
-//                                            })
-//                                            
-//                                            twitterClient?.getAccount(success: { (user : User) in
-//                                                print("\(user.name)")
-//                                                }, failure: { (error : Error) in
-//                                                    print("Error: \(error.localizedDescription)")
-//                                                    
-//                                            })
-//
-//
-//                                            
-//                                            
-//                            // -------
-//            }, failure: {(error : Error?) -> Void in
-//                print("error: \(error?.localizedDescription)")
-//        })
-        
-        //        twitterClient?.fetchAccessToken(withPath: "oauth/access_token",
-//                                        method: "POST",
-//                                        requestToken: requestToken,
-//                                        success: { (accessToken: BDBOAuth1Credential?) -> Void in
-//                print("Got Token!")
-////            twitterClient.GET(Constants.Twitter.GetCredentials,
-////                              parameters: nil,
-////                              progress: nil,
-////                              success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
-////                                print("account: \(response)")
-////                },
-////                              failue: { (task: NSURLSessionDataTask?, error: NSError) -> Void in 
-//        
-//            
-//            }) {(error: Error?) -> Void in
-//                print("error: \(error.localizedDescription)")
-//            }
-        
         return true
     }
 

@@ -24,30 +24,28 @@ class LogInViewController: UIViewController {
     
     @IBAction func onLogInWithTwitter(_ sender: AnyObject) {
         let twitterClient = TwitterClient.sharedInstance
-        twitterClient?.deauthorize()
-        twitterClient?.login(success: { print("GOT Token!")},
+        twitterClient?.login(success: { print("GOT Token!")
+            twitterClient?.homeTimeline(success: { (tweets : [Tweet]) in
+                for tweet in tweets {
+                    print("tweet: \(tweet.text!)")
+                }
+                }, failure: { (error: Error) in
+                    print("ERROR: \(error.localizedDescription)")
+            })
+            
+            twitterClient?.getAccount(success: { (user : User) in
+                print("\(user.name)")
+                }, failure: { (error : Error) in
+                    print("Error: \(error.localizedDescription)")
+                    
+            })
+            
+            
+            },
                              failure: { error in
                                 print("ERROR: \(error.localizedDescription)")
         } )
         
-//        twitterClient?.fetchRequestToken(withPath: "oauth/request_token",
-//                                         method: "GET",
-//                                         callbackURL: NSURL(string: Constants.Twitter.CallbackURL) as URL!,
-//                                         scope: nil,
-//                                         success: {(requestToken : BDBOAuth1Credential?) -> Void in
-//                                            print("GOT Token!")
-//                                            if let requestToken = requestToken {
-//                                                let requestTokenStr = String(describing:requestToken.token!)
-//                                                let authorizeURL = Constants.Twitter.AuthorizeURL + "?oauth_token=\(requestTokenStr)"
-//                                                if let url = NSURL(string: authorizeURL) as? URL {
-//                                                    let options = [String : Any]()
-//                                                    UIApplication.shared.open(url, options: options, completionHandler: nil)
-//                                                }
-//                                            }
-//            },
-//                                         failure: {(error: Error?) -> Void in
-//                                            print("error: \(error?.localizedDescription)")}
-//        )
     }
 
 
