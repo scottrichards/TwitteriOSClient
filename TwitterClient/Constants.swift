@@ -19,6 +19,7 @@ struct Constants {
         static let AuthorizeURL = apiURL + "/oauth/authorize"
         static let CallbackURL = Constants.CustomExtensionType + "://oauth"  // add custom extension type to create callback url for OAuth
         static let GetCredentials = apiURL + "/1.1/account/verify_credentials.json"
+        static let HomeTimeline = apiURL + "/1.1/statuses/home_timeline.json"
     }
     
 

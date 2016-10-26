@@ -51,8 +51,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                         requestToken: requestToken,
                                         success: {(accessToken: BDBOAuth1Credential?) -> Void in
                             print("Got Token!")
+                            // -----
+                                            twitterClient?.get(Constants.Twitter.GetCredentials, parameters: nil, progress: nil, success: {(task: URLSessionDataTask, response : Any?) -> Void in
+                                                print("response: \(response)")
+                                                
+                                                if let aDictionary = response as? [String : AnyObject] {
+                                                    let user = User(dictionary: aDictionary as NSDictionary)
+                                                    print("userName: \(user.name)")
+                                                }
+                                                //let user = response as! [NSDictionary]
+               //                                 print("user: \(user["name"])")
+                                                //let tweets = response as! [NSDictionary]
+                                                
+    
+                                                }, failure: { (task: URLSessionDataTask?, error :Error) in
+                                                    print("error: \(error.localizedDescription)")
+                                                    })
+                                            
+                                            twitterClient?.get(Constants.Twitter.HomeTimeline, parameters: nil, progress: nil, success: {(task: URLSessionDataTask, response : Any?) -> Void in
+                                                print("response: \(response)")
+                                                
+                                                if let timelineDictionary = response as? [NSDictionary] {
+                                                    let tweets = Tweet.tweetsWithArray(dictionaries: timelineDictionary)
+                                                    for tweet in tweets {
+                                                        print("tweet: \(tweet.text!)")
+                                                    }
+                                                    
+                                                }
+                                                
+                                                }, failure: { (task: URLSessionDataTask?, error :Error) in
+                                                    print("error: \(error.localizedDescription)")
+                                            })
+
+                                            
+                                            
+                            // -------
             }, failure: {(error : Error?) -> Void in
-                print("error: ")
+                print("error: \(error?.localizedDescription)")
         })
         
         //        twitterClient?.fetchAccessToken(withPath: "oauth/access_token",
