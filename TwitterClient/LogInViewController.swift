@@ -25,21 +25,7 @@ class LogInViewController: UIViewController {
     @IBAction func onLogInWithTwitter(_ sender: AnyObject) {
         let twitterClient = TwitterClient.sharedInstance
         twitterClient?.login(success: { print("GOT Token!")
-            twitterClient?.homeTimeline(success: { (tweets : [Tweet]) in
-                for tweet in tweets {
-                    print("tweet: \(tweet.text!)")
-                }
-                }, failure: { (error: Error) in
-                    print("ERROR: \(error.localizedDescription)")
-            })
-            
-            twitterClient?.getAccount(success: { (user : User) in
-                print("\(user.name)")
-                }, failure: { (error : Error) in
-                    print("Error: \(error.localizedDescription)")
-                    
-            })
-            
+            self.performSegue(withIdentifier: "logInSegue", sender: nil)
             
             },
                              failure: { error in
