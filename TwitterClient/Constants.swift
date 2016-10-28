@@ -22,6 +22,10 @@ struct Constants {
         static let HomeTimeline = apiURL + "/1.1/statuses/home_timeline.json"
     }
     
+    struct UserDefaults {
+        static let CurrentUserData = "CurrentUserData"
+    }
+    
 
     
 }

@@ -85,7 +85,15 @@ class TwitterClient: BDBOAuth1SessionManager {
                                         method: "POST",
                                         requestToken: requestToken,
                                         success: {(accessToken: BDBOAuth1Credential?) -> Void in
-                                            self.loginSuccessClosure?()
+                                            
+                                            self.getAccount(success: { (user : User) in
+                                                User.currentUser =  user
+                                                self.loginSuccessClosure?()
+                                                },
+                                                            failure: { (error : Error) in
+                                                    
+                                            })
+                                            
             }, failure : { (error : Error?) -> Void in
                 print("error: \(error?.localizedDescription)")
                 self.loginFailureClosure?(error!)
