@@ -41,19 +41,30 @@ class TweetsTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath)
 
-        var tweetInfo : Tweet?
+   //     var tweetInfo : Tweet?
         if (indexPath.row < tweets?.count ?? 0) {
-            tweetInfo = tweets?[indexPath.row]
+            //tweetInfo = tweets?[indexPath.row]
+            if let tweetCell = cell as? TweetTableCell, let tweetInfo = tweets?[indexPath.row] {
+                tweetCell.setFromTweet(tweet: tweetInfo)
+            }
         }
         
-        cell.textLabel?.text = tweetInfo?.text
+//        cell.textLabel?.text = tweetInfo?.text
 
         return cell
     }
     
+    @IBAction func onSignOut(_ sender: AnyObject) {
+        User.currentUser?.logout()
+//        self.performSegue(withIdentifier: "logInSegue", sender: nil)
+    }
 
+
+    @IBAction func onNewTweet(_ sender: AnyObject) {
+    }
+ 
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

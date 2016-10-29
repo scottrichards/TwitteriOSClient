@@ -9,10 +9,14 @@
 import UIKit
 import Foundation
 
+let userDidLogInNotification = "userDidLogInNotification"
+let userDidLogOutNotification = "userDidLogOutNotification"
+
 class User: NSObject {
     var name: String?
     var screnName: String?
     var profileURL: NSURL?
+    var profileURLString: String?
     var tagLine: String?
     
     var dictionary : NSMutableDictionary?
@@ -33,10 +37,15 @@ class User: NSObject {
         subDictionary = NSMutableDictionary()
         
         subDictionary?["name"] = self.name
-        subDictionary?["name"] = self.name
         subDictionary?["screen_name"] = self.screnName
-        subDictionary?["profilue_image_url_https"] = self.profileURL
+        subDictionary?["profilue_image_url_https"] = self.profileURLString
         subDictionary?["description"] = self.tagLine
+    }
+    
+    func logout() {
+        User.currentUser = nil
+        TwitterClient.sharedInstance?.requestSerializer.removeAccessToken()
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: userDidLogOutNotification), object: self)
     }
     
 //    init(fromTwitterAccount:NSDictionary) {

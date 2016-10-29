@@ -13,7 +13,9 @@ class LogInViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        if User.currentUser != nil {
+  //          self.performSegue(withIdentifier: "logInSegue", sender: nil)
+        }
         // Do any additional setup after loading the view.
     }
 

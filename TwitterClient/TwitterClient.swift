@@ -85,7 +85,7 @@ class TwitterClient: BDBOAuth1SessionManager {
                                         method: "POST",
                                         requestToken: requestToken,
                                         success: {(accessToken: BDBOAuth1Credential?) -> Void in
-                                            
+                                            print("requestToken: \(requestToken)")
                                             self.getAccount(success: { (user : User) in
                                                 User.currentUser =  user
                                                 self.loginSuccessClosure?()

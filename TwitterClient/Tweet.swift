@@ -11,9 +11,11 @@ import Foundation
 
 class Tweet: NSObject {
     var text : String?
-    var timeStamp : Date?
+    var datePosted : Date?
     var retweetCount: Int = 0
     var favoritesCount: Int = 0
+    static let inputDateFormatter = DateFormatter()
+    static let outputDateFormatter = DateFormatter()
     
     init (dictionary:NSDictionary) {
         text = dictionary["text"] as? String
@@ -23,10 +25,10 @@ class Tweet: NSObject {
         let timeStampString = dictionary["created_at"] as? String
         
         if let timeStampString = timeStampString {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
             
-            timeStamp = formatter.date(from: timeStampString)
+            Tweet.inputDateFormatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
+            
+            datePosted = Tweet.inputDateFormatter.date(from: timeStampString)
         }
     }
     
