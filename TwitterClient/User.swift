@@ -47,27 +47,7 @@ class User: NSObject {
         TwitterClient.sharedInstance?.requestSerializer.removeAccessToken()
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: userDidLogOutNotification), object: self)
     }
-    
-//    init(fromTwitterAccount:NSDictionary) {
-//        // self.dictionary = dictionary
-//        name = fromTwitterAccount["name"] as? String
-//        screnName = fromTwitterAccount["screen_name"] as? String
-//        let profileURLString = fromTwitterAccount["profilue_image_url_https"] as? String
-//        if let profileURLString = profileURLString {
-//            profileURL = NSURL(string: profileURLString)
-//        }
-//        tagLine = fromTwitterAccount["description"] as? String
-//        
-//        subDictionary = [String : String]()
-//        
-//        subDictionary?["name"] = self.name
-////        subDictionary?["screen_name"] = self.name
-////        subDictionary?["profilue_image_url_https"] = self.name
-////        subDictionary?["description"] = self.tagLine
-//        
-//        
-//    }
-//    
+
 
     class var currentUser: User? {
         get {

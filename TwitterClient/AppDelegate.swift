@@ -11,16 +11,16 @@ import BDBOAuth1Manager
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
+    
     var storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         if User.currentUser != nil {
             print("There is a current user")
-//            let vc = storyboard.instantiateViewController(withIdentifier: "TweetsViewController") as? UIViewController
-//            window?.rootViewController = vc
+            let vc = storyboard.instantiateViewController(withIdentifier: "TweetsViewController") as? UIViewController
+            window?.rootViewController = vc
         } else {
             print("There is NO current user")
         }
